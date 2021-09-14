@@ -41,9 +41,10 @@ function AuthForm() {
       // Create User
       try {
         const result = await createUser(email, password)
-        console.log(result)
+        // Loguear usuario
       } catch (error) {
         console.log(error)
+        toast.error(error.message)
       }
     }
   }
