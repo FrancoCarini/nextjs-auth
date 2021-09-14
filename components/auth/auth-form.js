@@ -2,6 +2,8 @@ import { useState, useRef } from "react"
 import axios from "axios"
 import { signIn } from "next-auth/client"
 import { useRouter } from "next/router"
+import { ToastContainer, toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 
 import classes from "./auth-form.module.css"
 
@@ -31,8 +33,10 @@ function AuthForm() {
       })
 
       if (!result.error) {
-        router.replace("/profile")
+        return router.replace("/profile")
       }
+
+      toast.error(result.error)
     } else {
       // Create User
       try {
@@ -65,6 +69,7 @@ function AuthForm() {
 
   return (
     <section className={classes.auth}>
+      <ToastContainer />
       <h1>{isLogin ? "Login" : "Sign Up"}</h1>
       <form onSubmit={handleSubmit}>
         <div className={classes.control}>
